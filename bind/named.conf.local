@@ -6,3 +6,8 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
+zone “sander-vanderlinden.sb.uclllabs.be” {
+type master;
+notify yes;
+file “/etc/bind/db.sander.vanderlinden.sb.uclllabs.be”;
+};
