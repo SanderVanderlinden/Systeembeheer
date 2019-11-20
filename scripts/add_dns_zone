@@ -1,0 +1,44 @@
+domain=$1
+mydate=`date +%Y%m%d`
+ 
+echo -e "\$TTL 604800
+@       IN  SOA  ns.$domain.sander-vanderlinden.sb.uclllabs.be.be. root.$domain.sander-vanderlinden.sb.uclllabs.be.(
+                                       $mydate"1"      ; Serial
+                                       604800          ; Refresh
+                                       600             ; Retry
+                                       2419200         ; Expire
+                                       604800 )        ; Negative Cache TTL
+;
+@               IN      NS      ns.$domain.sander-vanderlinden.sb.uclllabs.be.
+@               IN      NS      ns.sander-vanderlinden.sb.uclllabs.be.
+ns              IN      A       193.191.177.177
+@               IN      A       193.191.177.177  " > /etc/bind/zones/db.$domain.sander-vanderlinden.sb.uclllabs.be
+ 
+ 
+echo "Add zone to named.conf.local."
+ 
+echo -e "zone \"$domain.sander-vanderlinden.sb.uclllabs.be\" {
+       type master;
+       file \"/etc/bind/zones/db.$domain.sander-vanderlinden.sb.uclllabs.be\";
+       notify yes;
+};
+" >> /etc/bind/named.conf.local
+ 
+ 
+ 
+ 
+echo "Add NS record to db.sander-vanderlinden.sb.uclllabs.be."
+ 
+echo -e "$domain                IN      NS      ns.sander-vanderlinden.sb.uclllabs.be." >> /etc/bind/zones/db.sander-vanderlinden.sb.uclllabs.be
+ 
+serialline=$(grep "Serial" /etc/bind/zones/db.sander-vanderlinden.sb.uclllabs.be)
+serialnumber=$(echo $serialline | cut -d \; -f 1)
+((serialnumber++))
+newserial="$serialnumber         ; Serial"
+echo $newserial;
+sed -i "s/.*Serial.*/\t\t\t     $newserial/g" /etc/bind/zones/db.sander-vanderlinden.sb.uclllabs.be
+echo -e "serial updated, restarting bind9"
+ 
+systemctl restart bind9
+ 
+echo "Done."
