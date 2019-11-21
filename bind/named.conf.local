@@ -1,13 +1,18 @@
-//
+i//
 // Do any local configuration here
 //
 
 // Consider adding the 1918 zones here, if they are not used in your
 // organization
 //include "/etc/bind/zones.rfc1918";
+//include "/etc/bind/named.conf.mrt-zones";
 
-zone “sander-vanderlinden.sb.uclllabs.be” {
+zone "sander-vanderlinden.sb.uclllabs.be" {
 type master;
-notify yes;
-file “/etc/bind/db.sander.vanderlinden.sb.uclllabs.be”;
+file "/etc/bind/zones/db.sander-vanderlinden.sb.uclllabs.be";
+allow-transfer{
+	193.191.176.254;
+	193.191.177.4;
+	193.191.177.254;
+	};
 };
