@@ -1,0 +1,13 @@
+lHost www1.sander-vanderlinden.sb.uclllabs.be:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/www1.sander-vanderlinden.sb.uclllabs.be/public_html/
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        <Directory "/var/www/ansible.sander-vanderlinden.sb.uclllabs.be/public_html/private/">
+                AuthType Basic
+                AuthName "Password Protected Area"
+                AuthUserFile /etc/apache2/sites-available/.htpasswd
+                Require valid-user
+        </Directory>
+</VirtualHost>
