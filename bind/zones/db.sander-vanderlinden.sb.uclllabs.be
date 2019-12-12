@@ -3,7 +3,7 @@
 ;
 $TTL	300
 @	IN	SOA	ns.sander-vanderlinden.sb.uclllabs.be. root.sander-vanderlinden.sb.uclllabs.be. (
-			     15		; Serial
+			     17		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
@@ -28,3 +28,9 @@ secure.sander-vanderlinden.sb.uclllabs.be.   IN      CAA     0 issue "letsencryp
 secure.sander-vanderlinden.sb.uclllabs.be.   IN      CAA     0 iodef "mailto:sander.vanderlinden@student.ucll.be"
 supersecure.sander-vanderlinden.sb.uclllabs.be.   IN      CAA     0 issue "letsencrypt.org"
 supersecure.sander-vanderlinden.sb.uclllabs.be.   IN      CAA     0 iodef "mailto:sander.vanderlinden@student.ucll.be"
+
+ns                                      IN      AAAA    2001:6a8:2880:a077::b1
+@                                       IN      AAAA    2001:6a8:2880:a077::b1
+mx                                      IN      AAAA    2001:6a8:2880:a077::b1
+sander-vanderlinden.sb.uclllabs.be.	IN	AAAA	2001:6a8:2880:a077::b1
+ns.sander-vanderlinden.sb.uclllabs.be.  IN      AAAA    2001:6a8:2880:a077::b1
